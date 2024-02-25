@@ -1,7 +1,6 @@
-package persons_test
+package persons
 
 import (
-	"realtime-exchange-rates/pkg/persons"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -13,7 +12,7 @@ var filePath = "../../person.json"
 
 
 func TestPersonIsSortedInAsc(t *testing.T) {
-	test_persons, err := persons.GetPersons(filePath)
+	test_persons, err := GetPersons(filePath)
 	assert.Nil(t, err)
 
 	t.Run("Persons are returned in ascending order", func(t *testing.T) {
@@ -27,7 +26,7 @@ func TestPersonIsSortedInAsc(t *testing.T) {
 }
 
 func TestPersonIsSortedInDesc(t *testing.T) {
-	test_persons, err := persons.GetPersons(filePath)
+	test_persons, err := GetPersons(filePath)
 	assert.Nil(t, err)
 
 	t.Run("Persons are returned in descending order when stated", func(t *testing.T) {
@@ -41,7 +40,7 @@ func TestPersonIsSortedInDesc(t *testing.T) {
 }
 
 func TestPersonSortingDefaultsToDescIfNotSpecifiedCorrectly(t *testing.T) {
-	test_persons, err := persons.GetPersons(filePath);
+	test_persons, err := GetPersons(filePath);
 	assert.Nil(t, err)
 
 	t.Run("Persons are returned in descending order if wrong order was provided", func(t *testing.T) {
