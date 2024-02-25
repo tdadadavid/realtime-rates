@@ -4,16 +4,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"realtime-exchange-rates/utils"
+	"sort"
 )
 
 type Salary struct {
-	Value float64 `json:"value"`
-	Currency string `json:"currency"`
+	Value    float64 `json:"value"`
+	Currency string  `json:"currency"`
 }
 
 type Person struct {
-	Id string `json:"id"`
-	Name string `json:"name"`
+	Id     string `json:"id"`
+	Name   string `json:"name"`
 	Salary Salary `json:"salary"`
 }
 
@@ -23,35 +24,46 @@ type Persons struct {
 	Data []Person `json:"data"`
 }
 
-
 func (persons *Persons) Sort(direction string) Persons {
 
 	var sortedPersons []Person
 	if direction == "asc" {
 		sortedPersons = persons.sortAsc()
-	}else{
-	  sortedPersons =	persons.sortDesc()
+	} else {
+		sortedPersons = persons.sortDesc()
 	}
-	
-	return Persons {
+
+	return Persons{
 		Data: sortedPersons,
 	}
 }
 
-func (persons* Persons) sortAsc() []Person {
-	return []Person {
-		
-	}
+func (persons *Persons) sortAsc() []Person {
+	dataSet := persons.duplicate()
+
+	sort.Slice(dataSet, func(i, j int) bool {
+		return dataSet[i].Salary.Value < dataSet[j].Salary.Value
+	})
+	return dataSet
 }
 
 func (persons *Persons) sortDesc() []Person {
-	return []Person {
-		
-	}
+	dataSet := persons.duplicate()
+
+	sort.Slice(dataSet, func(i, j int) bool {
+		return dataSet[i].Salary.Value > dataSet[j].Salary.Value
+	})
+	return dataSet
+}
+
+func (persons *Persons) duplicate() []Person {
+	duplicate := make([]Person, len(persons.Data))
+	copy(duplicate, persons.Data)
+	return duplicate;
 }
 
 func (persons *Persons) GroupBySalary() GroupByCurrencyResult {
-	
+
 	return GroupByCurrencyResult{
 		"USD": []Person{},
 		"NGN": []Person{},
@@ -60,9 +72,7 @@ func (persons *Persons) GroupBySalary() GroupByCurrencyResult {
 }
 
 func (persons *Persons) FilterBySalary(amount int64) []Person {
-	return []Person {
-		
-	}
+	return []Person{}
 }
 
 func GetPersons() (*Persons, error) {
