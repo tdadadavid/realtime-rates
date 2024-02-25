@@ -34,7 +34,7 @@ func GetExchangeRatesForCurrencyPair(val string) (ExchangeRateResult, error) {
 func getExchangeRates(url string, result chan string) {
 	headers := utils.ApiKeyHeader {
 		Url: url,
-		Key: "sqt5JfnEkVOGaiTA63pA5EUyjPBiCzGA",
+		Key: "",
 	}
 	response, err := utils.HandleRequest(headers)
 
