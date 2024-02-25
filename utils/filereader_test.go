@@ -23,3 +23,12 @@ func TestReadFileContentFromWrongFilePath(t *testing.T) {
 	assert.NotNil(t, err)
 	assert.Empty(t, fileContents)
 }
+
+func TestReadEmptyJSONFlie(t *testing.T){
+	filePath := "../empty.person.json"
+
+	fileContents, err := ReadFromJSONFile(filePath)
+
+	assert.NotNil(t, err)
+	assert.True(t, fileContents == "")
+}
