@@ -44,7 +44,7 @@ func configureApp() *Application {
 
 func setupRoute(app *fiber.App) {
 	appRouter := app.Group("/api/v1")
-	// appRouter.Get("/rates", handlers.HandleRealtimeExchangeRate)
+	appRouter.Get("/rates", handlers.HandleRealtimeExchangeRate)
 	appRouter.Get("/persons", handlers.GetPersonsInformation)
 }
 
