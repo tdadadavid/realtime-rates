@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"realtime-exchange-rates/utils"
 	"sort"
+	"strings"
 )
 
 type Salary struct {
@@ -59,16 +60,32 @@ func (persons *Persons) SortDesc() []Person {
 func (persons *Persons) Duplicate() []Person {
 	duplicate := make([]Person, len(persons.Data))
 	copy(duplicate, persons.Data)
-	return duplicate;
+	return duplicate
 }
 
-func (persons *Persons) GroupBySalary() GroupByCurrencyResult {
+func (persons *Persons) GroupByCurrency() GroupByCurrencyResult {
 
-	return GroupByCurrencyResult{
-		"USD": []Person{},
-		"NGN": []Person{},
-		"EUR": []Person{},
+	var currencyToPersons = map[string][]Person{} //hashmap
+
+	// for each person
+	for _, person := range persons.Data {
+		// get the current person's currency
+		currentCurrency := strings.ToUpper(person.Salary.Currency)
+
+		if currentCurrency == "" {
+			currentCurrency = "NO-SALARY" // this edge case might never happen but if it does.
+		}
+
+		// check if the currency is already in the hashmap
+		if value, ok := currencyToPersons[currentCurrency]; ok {
+			value = append(value, person)              // add this person to the category
+			currencyToPersons[currentCurrency] = value // update the map
+		} else {
+			currencyToPersons[currentCurrency] = []Person{person} // add the new category.
+		}
 	}
+
+	return currencyToPersons
 }
 
 func (persons *Persons) FilterBySalary(amount int64) []Person {
