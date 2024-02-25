@@ -75,8 +75,8 @@ func (persons *Persons) FilterBySalary(amount int64) []Person {
 	return []Person{}
 }
 
-func GetPersons() (*Persons, error) {
-	personsStrings, err := utils.ReadFromJSONFile("person.json")
+func GetPersons(filePath string) (*Persons, error) {
+	personsStrings, err := utils.ReadFromJSONFile(filePath)
 	if err != nil {
 		return nil, err
 	}
