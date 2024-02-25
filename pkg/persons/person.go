@@ -28,9 +28,9 @@ func (persons *Persons) Sort(direction string) Persons {
 
 	var sortedPersons []Person
 	if direction == "asc" {
-		sortedPersons = persons.sortAsc()
+		sortedPersons = persons.SortAsc()
 	} else {
-		sortedPersons = persons.sortDesc()
+		sortedPersons = persons.SortDesc()
 	}
 
 	return Persons{
@@ -38,8 +38,8 @@ func (persons *Persons) Sort(direction string) Persons {
 	}
 }
 
-func (persons *Persons) sortAsc() []Person {
-	dataSet := persons.duplicate()
+func (persons *Persons) SortAsc() []Person {
+	dataSet := persons.Duplicate()
 
 	sort.Slice(dataSet, func(i, j int) bool {
 		return dataSet[i].Salary.Value < dataSet[j].Salary.Value
@@ -47,8 +47,8 @@ func (persons *Persons) sortAsc() []Person {
 	return dataSet
 }
 
-func (persons *Persons) sortDesc() []Person {
-	dataSet := persons.duplicate()
+func (persons *Persons) SortDesc() []Person {
+	dataSet := persons.Duplicate()
 
 	sort.Slice(dataSet, func(i, j int) bool {
 		return dataSet[i].Salary.Value > dataSet[j].Salary.Value
@@ -56,7 +56,7 @@ func (persons *Persons) sortDesc() []Person {
 	return dataSet
 }
 
-func (persons *Persons) duplicate() []Person {
+func (persons *Persons) Duplicate() []Person {
 	duplicate := make([]Person, len(persons.Data))
 	copy(duplicate, persons.Data)
 	return duplicate;

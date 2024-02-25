@@ -41,7 +41,7 @@ func TestPersonIsSortedInDesc(t *testing.T) {
 }
 
 func TestPersonSortingDefaultsToDescIfNotSpecifiedCorrectly(t *testing.T) {
-	test_persons, err := persons.GetPersons(filePath)
+	test_persons, err := persons.GetPersons(filePath);
 	assert.Nil(t, err)
 
 	t.Run("Persons are returned in descending order if wrong order was provided", func(t *testing.T) {
