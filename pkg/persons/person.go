@@ -3,9 +3,12 @@ package persons
 import (
 	"encoding/json"
 	"fmt"
+	exchangerates "realtime-exchange-rates/pkg/exchangeRates"
 	"realtime-exchange-rates/utils"
 	"sort"
+	"strconv"
 	"strings"
+	"sync"
 )
 
 type Salary struct {
@@ -88,8 +91,48 @@ func (persons *Persons) GroupByCurrency() GroupByCurrencyResult {
 	return currencyToPersons
 }
 
-func (persons *Persons) FilterBySalary(amount int64) []Person {
-	return []Person{}
+func (persons *Persons) FilterBySalary(amount float64) (Persons, error) {
+	var wg sync.WaitGroup
+	var qualifiedPersons []Person
+
+	for _, person  := range persons.Data {
+			wg.Add(1)
+
+			personsCurrency := strings.ToUpper(person.Salary.Currency)
+			personsSalary := person.Salary.Value;
+
+			// capture people whose salaries are in 'usd' and 
+			// is greater than or equal to amount constrant 
+			if personsCurrency == "USD" && personsSalary >= amount {
+				qualifiedPersons = append(qualifiedPersons, person)
+				continue;
+			}
+
+			// '%s-USD' becuase we are to find the value of the person salary in dollar.
+			currencyPair := fmt.Sprintf("%s-USD", personsCurrency)
+
+			result, err := exchangerates.GetExchangeRatesForCurrencyPair(currencyPair)
+			if err != nil {
+				return Persons{}, err
+			}
+
+			rate, err := strconv.ParseFloat(result.Rate, 64)
+			if err != nil {
+				return Persons{}, err
+			}
+
+			personSalaryInUSD := person.Salary.Value * rate
+
+			if personSalaryInUSD >= float64(amount)  {
+				qualifiedPersons = append(qualifiedPersons, person)
+			}
+	}
+
+	wg.Done()
+
+	return Persons{
+		Data: qualifiedPersons,
+	}, nil
 }
 
 func GetPersons(filePath string) (*Persons, error) {

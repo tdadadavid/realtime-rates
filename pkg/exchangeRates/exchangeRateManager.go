@@ -23,7 +23,7 @@ func GetExchangeRatesForCurrencyPair(val string) (ExchangeRateResult, error) {
 	result := make(chan string)
 	
 	for _, url := range urls {
-		go getExchangeRates(url, result)
+		go getExchangeRates(url, currencies, result)
 	}
 
 	return ExchangeRateResult {
@@ -31,18 +31,31 @@ func GetExchangeRatesForCurrencyPair(val string) (ExchangeRateResult, error) {
 	}, nil
 }
 
-func getExchangeRates(url string, result chan string) {
-	headers := utils.ApiKeyHeader {
+func getExchangeRates(url string, currencies utils.ExchnageRateCurrencies, result chan string) {
+	headers := utils.RequestParams {
 		Url: url,
-		Key: "",
+		Key: "sqt5JfnEkVOGaiTA63pA5EUyjPBiCzGA",
 	}
+
 	response, err := utils.HandleRequest(headers)
+	if err != nil {
+		fmt.Println("Error: ", err.Error())
+		result <- ""
+	}
+
+	formatedResponse, err := FormatAPIResponse(response, url)
+	if err != nil {
+		fmt.Println("Error: ", err.Error())
+		result <- ""
+	}
+
+	rate := fmt.Sprintf("%f", formatedResponse[currencies.To])
 
 	if err != nil {
 		fmt.Println("Error: ", err.Error())
 		result <- ""
 	}else{
-		result <- response
+		result <- rate
 	}
 }
 

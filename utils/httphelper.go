@@ -5,12 +5,12 @@ import (
 	"net/http"
 )
 
-type ApiKeyHeader struct {
+type RequestParams struct {
 	Url string
 	Key  string
 }
 
-func HandleRequest(opt ApiKeyHeader) (string, error) {
+func HandleRequest(opt RequestParams) (string, error) {
 
 	req, err := http.NewRequest("GET", opt.Url, nil)
 	if err != nil {
