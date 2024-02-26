@@ -1,0 +1,82 @@
+{
+	"1": {
+		"id": "3ndozw",
+		"name": "king",
+		"salary": {
+			"value": 10,
+			"currency": "USD"
+		}
+	},
+	"2": {
+		"id": "bay_89",
+		"name": "Bayo",
+		"salary": {
+			"value": 20,
+			"currency": "KRW"
+		}
+	},
+	"3": {
+		"id": "flo_90",
+		"name": "Flora",
+		"salary": {
+			"value": 30,
+			"currency": "USD"
+		}
+	},
+	"4": {
+		"id": "jam_281",
+		"name": "james",
+		"salary": {
+			"value": 40,
+			"currency": "AUD"
+		}
+	},
+	"5": {
+		"id": "fayo_281",
+		"name": "fayo",
+		"salary": {
+			"value": 50,
+			"currency": "BRL"
+		}
+	},
+	"6": {
+		"id": "puppy_1626",
+		"name": "puppy",
+		"salary": {
+			"value": 60,
+			"currency": "GBP"
+		}
+	},
+	"7": {
+		"id": "lion_129",
+		"name": "lion",
+		"salary": {
+			"value": 70,
+			"currency": "USD"
+		}
+	},
+	"8": {
+		"id": "barack_1919",
+		"name": "barack",
+		"salary": {
+			"value": 80,
+			"currency": "CAD"
+		}
+	},
+	"9": {
+		"id": "dubem_192",
+		"name": "dubemo",
+		"salary": {
+			"value": 90,
+			"currency": "GBP"
+		}
+	},
+	"10": {
+		"id": "reko_292",
+		"name": "rekoche",
+		"salary": {
+			"value": 100,
+			"currency": "MYR"
+		}
+	}
+}
