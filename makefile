@@ -10,4 +10,4 @@ download_deps:
 
 # run tests
 tests:
-	go test -run ""
+	go test -run $name //TODO: work on this.
