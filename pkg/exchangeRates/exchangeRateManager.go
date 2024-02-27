@@ -23,7 +23,7 @@ func GetExchangeRatesForCurrencyPair(val string) (ExchangeRateResult, error) {
 	result := make(chan string)
 	
 	for _, url := range urls {
-		go getExchangeRates(url, currencies, result)
+		go GetExchangeRates(url, currencies, result)
 	}
 
 	return ExchangeRateResult {
@@ -31,7 +31,8 @@ func GetExchangeRatesForCurrencyPair(val string) (ExchangeRateResult, error) {
 	}, nil
 }
 
-func getExchangeRates(url string, currencies utils.ExchnageRateCurrencies, result chan string) {
+// for unit testing purposes.
+func GetExchangeRates(url string, currencies utils.ExchnageRateCurrencies, result chan string) {
 	headers := utils.RequestParams {
 		Url: url,
 		Key: "sqt5JfnEkVOGaiTA63pA5EUyjPBiCzGA",
