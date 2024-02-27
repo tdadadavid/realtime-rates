@@ -99,3 +99,67 @@ func TestPersonsGrouping(t *testing.T) {
 		assert.True(t, len(groupedPersonsResult["NO-SALARY"]) == 1)
 	})
 }
+
+func TestFilterByUSDConstraint(t *testing.T) {
+	test_persons := Persons{
+		Data: []Person{
+			{
+				Name: "test1",
+				Id:   "1",
+				Salary: Salary{
+					Value:    30,
+					Currency: "USD",
+				},
+			},
+			{
+				Name: "David Dada",
+				Id:   "1",
+				Salary: Salary{
+					Value:    3000,
+					Currency: "USD",
+				},
+			},
+			{
+				Name: "test2",
+				Id:   "2",
+				Salary: Salary{
+					Value:    405,
+					Currency: "NGN",
+				},
+			},
+			{
+				Name: "test2",
+				Id:   "2",
+				Salary: Salary{
+					Value:    30,
+					Currency: "GBP", // greater than $100
+				},
+			},
+			{
+				Name: "test2",
+				Id:   "2",
+				Salary: Salary{
+					Value:    300,
+					Currency: "GBP", // greater than $100
+				},
+			},
+			{
+				Name: "test2",
+				Id:   "2",
+				Salary: Salary{
+					Value:    0.12,
+					Currency: "CAD", 
+				},
+			},
+		},
+	}
+
+	t.Run("People with less than $100 equivalent-salay are filtered out", func(t *testing.T) {
+		people_with_salary_equal_or_greater_than_100, err := test_persons.FilterBySalary(100)
+		assert.Nil(t, err);
+
+		not_up_to_2_people_earn_equal_or_above_100_dollars := len(people_with_salary_equal_or_greater_than_100.Data) > 2
+
+		assert.False(t, not_up_to_2_people_earn_equal_or_above_100_dollars)
+	})
+}
