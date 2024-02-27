@@ -17,7 +17,6 @@ func TestGetExchangeRateForCurrencyPair(t *testing.T) {
 		rate, err := strconv.ParseFloat(res.Rate, 64)
 		assert.Nil(t, err)
 
-		assert.Nil(t, err)
 		assert.NotNil(t, rate)
 	})
 }
