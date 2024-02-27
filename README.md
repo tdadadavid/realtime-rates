@@ -19,8 +19,6 @@ This project contains two features:
   3. Secret-Manager: Azure Key Vault
   4. Containerization Tool: Docker
 
-
-
 ## SETUP
 
 ### Clone project
