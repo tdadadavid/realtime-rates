@@ -3,11 +3,13 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"os"
 	handlers "realtime-exchange-rates/api"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/joho/godotenv"
 )
 
 type Application struct {
@@ -23,6 +25,9 @@ type ApplicationError struct {
 type ErrorHandlerFunc func (ctx *fiber.Ctx, err error) error
 
 func configureApp() *Application {
+	// setup environment variables for the application.
+	loadEnvVars()
+
   app := fiber.New(fiber.Config{
 		ErrorHandler: errorHandler(),
 		AppName: "Cadana",
@@ -72,5 +77,13 @@ func errorHandler() ErrorHandlerFunc {
 		Success: false,
 		Message: http.StatusText(500),
 	})
+	}
+}
+
+func loadEnvVars() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error: loading environment variables", err.Error())
+		os.Exit(1)
 	}
 }
