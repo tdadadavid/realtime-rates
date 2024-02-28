@@ -59,7 +59,7 @@ func startServer(app *fiber.App) func()  {
 		fmt.Printf("Server is running on http://localhost:%d\n", port)
 		err := app.Listen(fmt.Sprintf(":%d", port))
 		if err != nil {
-			fmt.Println("Error starting server:", err)
+			return
 		}
 	}
 }
@@ -83,7 +83,6 @@ func errorHandler() ErrorHandlerFunc {
 func loadEnvVars() {
 	err := godotenv.Load()
 	if err != nil {
-		fmt.Println("Error: loading environment variables", err.Error())
 		os.Exit(1)
 	}
 }

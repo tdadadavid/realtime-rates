@@ -144,7 +144,6 @@ func GetPersons(filePath string) (*Persons, error) {
 	var JSONPerson map[string]Person
 	err = json.Unmarshal([]byte(personsStrings), &JSONPerson)
 	if err != nil {
-		fmt.Println("Error unmarshalling JSON:", err)
 		return nil, err
 	}
 

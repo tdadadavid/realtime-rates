@@ -8,15 +8,15 @@ type ExchnageRateCurrencies struct {
 }
 
 
-func SplitCurrencyPair(currencyPair string) ExchnageRateCurrencies {
-	currencies := strings.Split(currencyPair, "-")
-	return formatCurrencies(currencies[0], currencies[1])
+func splitCurrencyPair(currencyPair string) []string {
+	return strings.Split(currencyPair, "-")
 }
 
 
-func formatCurrencies(firstCurrency, secondCurrency string) ExchnageRateCurrencies {
+func FormatCurrencies(currenyPair string) ExchnageRateCurrencies {
+	currencies := splitCurrencyPair(currenyPair)
 	return ExchnageRateCurrencies{
-		From: firstCurrency,
-		To: secondCurrency,
+		From: currencies[0],
+		To: currencies[1],
 	}
 }

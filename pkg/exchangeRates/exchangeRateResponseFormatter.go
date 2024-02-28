@@ -2,7 +2,6 @@ package exchangerates
 
 import (
 	"encoding/json"
-	"fmt"
 	"strings"
 )
 
@@ -47,7 +46,6 @@ func formatFixerAPIResponse(resp string) (Rate, error) {
 	var fixerResponse FixerAPIResponse
 	err := json.Unmarshal([]byte(resp), &fixerResponse)
 	if err != nil {
-		fmt.Println("Error: converting api response to struct", err.Error())
 		return nil, err
 	}
 	return fixerResponse.Rates, nil;
@@ -57,7 +55,6 @@ func formatFrankFurterResponse(resp string) (Rate, error) {
 	var frankFurterResponse FrankFurterAPIResponse
 	err := json.Unmarshal([]byte(resp), &frankFurterResponse)
 	if err != nil {
-		fmt.Println("Error: converting api response to struct", err.Error())
 		return nil, err
 	}
 	return frankFurterResponse.Rates, nil;
