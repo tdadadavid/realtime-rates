@@ -16,7 +16,7 @@ This project contains two features:
 
   1. Language: Golang
   2. Framework: Fiber
-  3. Secret-Manager: Azure Key Vault
+  3. Secret-Manager: AWS Secrets Manager 
   4. Containerization Tool: Docker
 
 ## SETUP
