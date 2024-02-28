@@ -19,7 +19,7 @@ var (
 )
 
 func GetExchangeRatesForCurrencyPair(val string) (ExchangeRateResult, error) {
-	currencies := utils.SplitCurrencyPair(val)
+	currencies := utils.FormatCurrencies(val)
 
 	urls := []string{prepareFixerUrl(currencies), prepareFrankFurterUrl(currencies)}
 	result := make(chan string)
@@ -48,20 +48,17 @@ func GetExchangeRates(url string, currencies utils.ExchnageRateCurrencies, resul
 	
 	response, err := utils.HandleRequest(headers)
 	if err != nil {
-		fmt.Println("Error: ", err.Error())
 		result <- ""
 	}
 
 	formatedResponse, err := FormatAPIResponse(response, url)
 	if err != nil {
-		fmt.Println("Error: ", err.Error())
 		result <- ""
 	}
 
 	rate := fmt.Sprintf("%f", formatedResponse[currencies.To])
 
 	if err != nil {
-		fmt.Println("Error: ", err.Error())
 		result <- ""
 	}else{
 		result <- rate
