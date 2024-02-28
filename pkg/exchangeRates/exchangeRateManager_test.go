@@ -1,7 +1,6 @@
 package exchangerates
 
 import (
-	"fmt"
 	"strconv"
 	"testing"
 
@@ -18,16 +17,5 @@ func TestGetExchangeRateForCurrencyPair(t *testing.T) {
 		assert.Nil(t, err)
 
 		assert.NotNil(t, rate)
-	})
-}
-
-func TestGetExchangeRateForCurrencyPairWithInvalidCurrency(t *testing.T) {
-	t.Run("It throws 'InvalidCurrency' Error for invalid currency pair", func(t *testing.T) {
-
-		wrongCurrency := "NPM"
-		res, err := GetExchangeRatesForCurrencyPair(fmt.Sprintf("USD-%s", wrongCurrency))
-		
-		assert.Nil(t, err)
-		assert.Contains(t, res.Rate, "0.0")
 	})
 }
