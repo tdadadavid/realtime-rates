@@ -55,18 +55,17 @@ func getSecretFromAWSSecretManager(secretName string) string {
 	return result
 }
 
-
 func mockGetSecretFromAWSSecretManager(secretName string) string {
-    // Simulate fetching secrets for testing
-    mockSecrets := map[string]string{
-        "mockKey": "mockValue",
-    }
+	// Simulate fetching secrets for testing
+	mockSecrets := map[string]string{
+		"mockKey": "mockValue",
+	}
 
-    secret, exists := mockSecrets[secretName]
-    if !exists {
-        return ""
-    }
-		time.Sleep(5 * time.Millisecond)
+	secret, exists := mockSecrets[secretName]
+	if !exists {
+		return ""
+	}
+	time.Sleep(5 * time.Millisecond)
 
-    return secret
+	return secret
 }

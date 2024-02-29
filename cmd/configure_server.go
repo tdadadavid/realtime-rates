@@ -84,7 +84,6 @@ func errorHandler() ErrorHandlerFunc {
 func loadEnvVars() {
 	err := godotenv.Load(".env")
 	if err != nil {
-		log.Println("Error: ", err)
-		os.Exit(1)
+		log.Println("Error: env file not found")
 	}
 }
