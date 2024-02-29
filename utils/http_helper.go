@@ -7,7 +7,7 @@ import (
 
 type RequestParams struct {
 	Url string
-	Key  string
+	Key string
 }
 
 func HandleRequest(opt RequestParams) (string, error) {

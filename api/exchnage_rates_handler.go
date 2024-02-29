@@ -10,19 +10,17 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-
 type CurrencyPairRequest struct {
 	CurrencyPair string `json:"currency-pair" validate:"required"`
 }
 
 type CurrenPairResponse struct {
-	Success bool `json:"success"`
-	Message string `json:"message"`
-	Data CurrencyPairExchangeRates `json:"data"`
+	Success bool                      `json:"success"`
+	Message string                    `json:"message"`
+	Data    CurrencyPairExchangeRates `json:"data"`
 }
 
 type CurrencyPairExchangeRates map[string]string
-
 
 func HandleRealtimeExchangeRate(ctx *fiber.Ctx) error {
 	requestValidator := validator.New()
@@ -32,11 +30,10 @@ func HandleRealtimeExchangeRate(ctx *fiber.Ctx) error {
 		return ctx.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"message": "Invalid request body.",
-			"errors": err.Error(),
+			"errors":  err.Error(),
 		})
 	}
 
-	
 	// // validate the request body
 	if err := requestValidator.Struct(&request); err != nil {
 		var errorMessages []string
@@ -47,11 +44,11 @@ func HandleRealtimeExchangeRate(ctx *fiber.Ctx) error {
 				errorMessages = append(errorMessages, errMsg)
 			}
 		}
-		
+
 		return ctx.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"message": "Validation errors.",
-			"errors": errorMessages,
+			"errors":  errorMessages,
 		})
 	}
 

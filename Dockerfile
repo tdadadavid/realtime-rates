@@ -12,14 +12,14 @@ COPY . .
 ENV GOOS=linux
 ENV GOARCH=amd64
 
-RUN go build 
+RUN go build -o main
 
 # == Final Stage ==
 FROM alpine:latest
 
 WORKDIR /app
 
-COPY --from=builder /app .
+COPY --from=builder /app/main /app/
 
 EXPOSE 3000
 

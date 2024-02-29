@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func ReadFromJSONFile(path string) (string, error)  {
+func ReadFromJSONFile(path string) (string, error) {
 
 	file, err := os.Open(path)
 	if err != nil {
@@ -25,4 +25,4 @@ func ReadFromJSONFile(path string) (string, error)  {
 	}
 
 	return string(fileContents), nil
-}	
+}

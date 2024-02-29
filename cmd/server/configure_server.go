@@ -13,24 +13,24 @@ import (
 )
 
 type Application struct {
-	server *fiber.App
+	server      *fiber.App
 	startServer func()
 }
 
 type ApplicationError struct {
-	Success bool `json:"success"`
+	Success bool   `json:"success"`
 	Message string `json:"message"`
 }
 
-type ErrorHandlerFunc func (ctx *fiber.Ctx, err error) error
+type ErrorHandlerFunc func(ctx *fiber.Ctx, err error) error
 
 func configureApp() *Application {
 	// setup environment variables for the application.
 	loadEnvVars()
 
-  app := fiber.New(fiber.Config{
+	app := fiber.New(fiber.Config{
 		ErrorHandler: errorHandler(),
-		AppName: "Cadana",
+		AppName:      "Cadana",
 	})
 
 	// app configurations
@@ -40,9 +40,9 @@ func configureApp() *Application {
 
 	// add routes.
 	setupRoute(app)
-	
+
 	return &Application{
-		server: app,
+		server:      app,
 		startServer: startServer(app),
 	}
 }
@@ -53,8 +53,8 @@ func setupRoute(app *fiber.App) {
 	appRouter.Get("/persons", handlers.GetPersonsInformation)
 }
 
-func startServer(app *fiber.App) func()  {
-  return func ()  {
+func startServer(app *fiber.App) func() {
+	return func() {
 		port := 3000
 		fmt.Printf("Server is running on http://localhost:%d\n", port)
 		err := app.Listen(fmt.Sprintf(":%d", port))
@@ -72,11 +72,11 @@ func corsConfiguration(ctx *fiber.Ctx) error {
 }
 
 func errorHandler() ErrorHandlerFunc {
-	return func (ctx *fiber.Ctx, err error) error  {
-		return ctx.Status(ctx.Response().StatusCode()).JSON(ApplicationError {
-		Success: false,
-		Message: http.StatusText(500),
-	})
+	return func(ctx *fiber.Ctx, err error) error {
+		return ctx.Status(ctx.Response().StatusCode()).JSON(ApplicationError{
+			Success: false,
+			Message: http.StatusText(500),
+		})
 	}
 }
 

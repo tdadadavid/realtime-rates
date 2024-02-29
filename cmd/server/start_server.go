@@ -1,8 +1,5 @@
 package server
 
-func  Start() {
+func Start() {
 	configureApp().startServer()
 }
-
-
-

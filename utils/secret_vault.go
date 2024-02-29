@@ -29,7 +29,7 @@ func getSecretFromAWSSecretManager(secretName string) string {
 	secretManager := secretsmanager.NewFromConfig(config)
 
 	input := &secretsmanager.GetSecretValueInput{
-		SecretId: aws.String(secretName),
+		SecretId:     aws.String(secretName),
 		VersionStage: aws.String("AWSCURRENT"),
 	}
 
@@ -42,7 +42,6 @@ func getSecretFromAWSSecretManager(secretName string) string {
 	var secrets Secrets
 	err = json.Unmarshal([]byte(*res.SecretString), &secrets)
 	if err != nil {
-		log.Println("Error converting json string to structs.")
 		return ""
 	}
 

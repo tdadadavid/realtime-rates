@@ -7,10 +7,10 @@ import (
 )
 
 func TestReadFromCorrectFilePath(t *testing.T) {
-	filePath := "../person.json";
+	filePath := "../person.json"
 
 	fileContents, err := ReadFromJSONFile(filePath)
-	
+
 	assert.Nil(t, err)
 	assert.Contains(t, fileContents, "king")
 }
@@ -24,7 +24,7 @@ func TestReadFileContentFromWrongFilePath(t *testing.T) {
 	assert.Empty(t, fileContents)
 }
 
-func TestReadEmptyJSONFlie(t *testing.T){
+func TestReadEmptyJSONFlie(t *testing.T) {
 	filePath := "../empty.person.json"
 
 	fileContents, err := ReadFromJSONFile(filePath)

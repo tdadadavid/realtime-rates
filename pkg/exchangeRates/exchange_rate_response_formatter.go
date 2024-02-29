@@ -20,20 +20,19 @@ import (
 type Rate map[string]float64
 
 type FixerAPIResponse struct {
-	Base string `json:"base"`
-	Date string `json:"date"`
-	Rates Rate `json:"rate"`
-	Success bool `json:"success"`
-	Timestamp int64 `json:"timestamp"`
+	Base      string `json:"base"`
+	Date      string `json:"date"`
+	Rates     Rate   `json:"rate"`
+	Success   bool   `json:"success"`
+	Timestamp int64  `json:"timestamp"`
 }
 
 type FrankFurterAPIResponse struct {
 	Amount float64 `json:"amount"`
-	Base string `json:"base"`
-	Date string `json:"date"`
-	Rates Rate `json:"rates"`
+	Base   string  `json:"base"`
+	Date   string  `json:"date"`
+	Rates  Rate    `json:"rates"`
 }
-
 
 func FormatAPIResponse(resp, url string) (Rate, error) {
 	if strings.Contains(url, "frankfurter") {
@@ -48,7 +47,7 @@ func formatFixerAPIResponse(resp string) (Rate, error) {
 	if err != nil {
 		return nil, err
 	}
-	return fixerResponse.Rates, nil;
+	return fixerResponse.Rates, nil
 }
 
 func formatFrankFurterResponse(resp string) (Rate, error) {
@@ -57,5 +56,5 @@ func formatFrankFurterResponse(resp string) (Rate, error) {
 	if err != nil {
 		return nil, err
 	}
-	return frankFurterResponse.Rates, nil;
+	return frankFurterResponse.Rates, nil
 }

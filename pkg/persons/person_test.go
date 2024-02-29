@@ -148,7 +148,7 @@ func TestFilterByUSDConstraint(t *testing.T) {
 				Id:   "2",
 				Salary: Salary{
 					Value:    0.12,
-					Currency: "CAD", 
+					Currency: "CAD",
 				},
 			},
 		},
@@ -156,7 +156,7 @@ func TestFilterByUSDConstraint(t *testing.T) {
 
 	t.Run("People with less than $100 equivalent-salay are filtered out", func(t *testing.T) {
 		people_with_salary_equal_or_greater_than_100, err := test_persons.FilterBySalary(100)
-		assert.Nil(t, err);
+		assert.Nil(t, err)
 
 		not_up_to_2_people_earn_equal_or_above_100_dollars := len(people_with_salary_equal_or_greater_than_100.Data) > 2
 

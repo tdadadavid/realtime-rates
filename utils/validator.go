@@ -11,7 +11,7 @@ func ValidateRequestBody(userInput interface{}) error {
 func handleValidation(userInput interface{}) error {
 
 	if err := Validator.Struct(userInput); err != nil {
-		return err;
+		return err
 	}
 
 	return nil

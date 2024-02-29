@@ -11,11 +11,9 @@ type ExchangeRateResult struct {
 	Rate string `json:"rate"`
 }
 
-
-
 var (
-	FrankFurterUrl  string = "https://api.frankfurter.app/latest?from=%s&to=%s"
-	OpenExchangeRatesUrl = "https://api.apilayer.com/fixer/latest?base=%s&symbols=%s"
+	FrankFurterUrl       string = "https://api.frankfurter.app/latest?from=%s&to=%s"
+	OpenExchangeRatesUrl        = "https://api.apilayer.com/fixer/latest?base=%s&symbols=%s"
 )
 
 func GetExchangeRatesForCurrencyPair(val string) (ExchangeRateResult, error) {
@@ -23,19 +21,19 @@ func GetExchangeRatesForCurrencyPair(val string) (ExchangeRateResult, error) {
 
 	urls := []string{prepareFixerUrl(currencies), prepareFrankFurterUrl(currencies)}
 	result := make(chan string)
-	
+
 	for _, url := range urls {
 		go GetExchangeRates(url, currencies, result)
 	}
 
-	return ExchangeRateResult {
-		Rate: <- result,
+	return ExchangeRateResult{
+		Rate: <-result,
 	}, nil
 }
 
 // for unit testing purposes.
 func GetExchangeRates(url string, currencies utils.ExchnageRateCurrencies, result chan string) {
-	headers := utils.RequestParams {
+	headers := utils.RequestParams{
 		Url: url,
 		Key: "",
 	}
@@ -45,7 +43,7 @@ func GetExchangeRates(url string, currencies utils.ExchnageRateCurrencies, resul
 	if strings.Contains(url, "fixer") {
 		headers.Key = utils.GetSecretFromVault(os.Getenv("SECRET_NAME"))
 	}
-	
+
 	response, err := utils.HandleRequest(headers)
 	if err != nil {
 		result <- ""
@@ -60,7 +58,7 @@ func GetExchangeRates(url string, currencies utils.ExchnageRateCurrencies, resul
 
 	if err != nil {
 		result <- ""
-	}else{
+	} else {
 		result <- rate
 	}
 }
