@@ -17,10 +17,16 @@ RUN go build -o main
 # == Final Stage ==
 FROM alpine:latest
 
-WORKDIR /app
+WORKDIR /
 
 COPY --from=builder /app/main /app/
 
+# Set execute permission
+RUN chmod +x /app/main
+
+# Add any necessary dependencies (if needed)
+RUN apk --no-cache add libc6-compat
+
 EXPOSE 3000
 
-CMD [ "./main" ] //TODO work on this.
+CMD [ "./app/main" ]
