@@ -39,16 +39,16 @@ This project contains two features:
   go mod install 
 ```
 
-### Setup via Docker
-
-```bash
-  docker run -p $PORT:3000 dockerrundavid/realtime-rates -d
-```
-
 ### Create environment file & fill them correctly
 
 ```bash
   cp .env.example .env
+```
+
+### Setup via Docker
+
+```bash
+  docker run --env-file ./.env -p $PORT:3000 dockerrundavid/realtime-rates -d
 ```
 
 ### Start project [dev mode]
