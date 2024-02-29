@@ -1,4 +1,4 @@
-package utils
+package persons
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 )
 
 func TestReadFromCorrectFilePath(t *testing.T) {
-	filePath := "../person.json"
+	filePath := "../../person.json"
 
 	fileContents, err := ReadFromJSONFile(filePath)
 
@@ -16,7 +16,7 @@ func TestReadFromCorrectFilePath(t *testing.T) {
 }
 
 func TestReadFileContentFromWrongFilePath(t *testing.T) {
-	filePath := "../../person.json"
+	filePath := "../../../../person.json"
 
 	fileContents, err := ReadFromJSONFile(filePath)
 

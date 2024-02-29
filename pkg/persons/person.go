@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	exchangerates "realtime-exchange-rates/pkg/exchangeRates"
-	"realtime-exchange-rates/utils"
 	"sort"
 	"strconv"
 	"strings"
@@ -134,7 +133,7 @@ func (persons *Persons) FilterBySalary(amount float64) (Persons, error) {
 }
 
 func GetPersons(filePath string) (*Persons, error) {
-	personsStrings, err := utils.ReadFromJSONFile(filePath)
+	personsStrings, err := ReadFromJSONFile(filePath)
 	if err != nil {
 		return nil, err
 	}
