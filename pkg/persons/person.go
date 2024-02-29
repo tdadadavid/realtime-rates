@@ -67,14 +67,12 @@ func (persons *Persons) Duplicate() []Person {
 }
 
 func (persons *Persons) GroupByCurrency() GroupByCurrencyResult {
-
 	var currencyToPersons = map[string][]Person{} //hashmap
 
 	// for each person
 	for _, person := range persons.Data {
 		// get the current person's currency
 		currentCurrency := strings.ToUpper(person.Salary.Currency)
-
 		if currentCurrency == "" {
 			currentCurrency = "NO-SALARY" // this edge case might never happen but if it does.
 		}

@@ -2,6 +2,7 @@ package exchangerates
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"realtime-exchange-rates/utils"
 	"strings"
@@ -46,17 +47,20 @@ func GetExchangeRates(url string, currencies utils.ExchnageRateCurrencies, resul
 
 	response, err := utils.HandleRequest(headers)
 	if err != nil {
+		log.Println("[Request Error]: ", err)
 		result <- ""
 	}
 
 	formatedResponse, err := FormatAPIResponse(response, url)
 	if err != nil {
+		log.Println("[Currency Format Error]: ", err)
 		result <- ""
 	}
 
 	rate := fmt.Sprintf("%f", formatedResponse[currencies.To])
 
 	if err != nil {
+		log.Println("[Currency Format Error]: ", err)
 		result <- ""
 	} else {
 		result <- rate

@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	handlers "realtime-exchange-rates/api"
@@ -59,7 +60,7 @@ func startServer(app *fiber.App) func() {
 		fmt.Printf("Server is running on http://localhost:%d\n", port)
 		err := app.Listen(fmt.Sprintf(":%d", port))
 		if err != nil {
-			return
+			log.Println("Error: ", err)
 		}
 	}
 }
@@ -83,6 +84,7 @@ func errorHandler() ErrorHandlerFunc {
 func loadEnvVars() {
 	err := godotenv.Load()
 	if err != nil {
+		log.Println("Error: ", err)
 		os.Exit(1)
 	}
 }
