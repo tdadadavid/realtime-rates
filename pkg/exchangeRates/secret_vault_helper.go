@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -52,4 +53,20 @@ func getSecretFromAWSSecretManager(secretName string) string {
 	}
 
 	return result
+}
+
+
+func mockGetSecretFromAWSSecretManager(secretName string) string {
+    // Simulate fetching secrets for testing
+    mockSecrets := map[string]string{
+        "mockKey": "mockValue",
+    }
+
+    secret, exists := mockSecrets[secretName]
+    if !exists {
+        return ""
+    }
+		time.Sleep(5 * time.Millisecond)
+
+    return secret
 }
