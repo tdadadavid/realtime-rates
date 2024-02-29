@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	handlers "realtime-exchange-rates/api"
 
 	"github.com/gofiber/fiber/v2"
