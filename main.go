@@ -1,6 +1,6 @@
 package main
 
-import server "realtime-exchange-rates/server"
+import server "realtime-exchange-rates/cmd"
 
 func main() {
 	server.Start()
