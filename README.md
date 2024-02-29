@@ -16,10 +16,16 @@ This project contains two features:
 
   1. Language: Golang
   2. Framework: Fiber
-  3. Secret-Manager: AWS Secrets Manager 
+  3. Secret-Manager: AWS Secrets Manager
   4. Containerization Tool: Docker
 
 ## SETUP
+
+### API Documentaion [Postman]
+
+```bash
+  https://documenter.getpostman.com/view/28806235/2sA2rGtyA6
+```
 
 ### Clone project
 
